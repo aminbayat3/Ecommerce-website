@@ -1,28 +1,36 @@
-import React from 'react';
+import React from "react";
 
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import FormInput from "../form-input/form-input.component";
+import CustomButton from "../custom-button/custom-button.component";
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
-import './sign-in.styles.scss';
+import "./sign-in.styles.scss";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     };
   }
 
-  onSubmitHandler = (event) => {
+  onSubmitHandler = async (event) => {
     event.preventDefault();
-    this.setState(() => ({
-      email: "",
-      password: "",
-    }));
+    const { email, password } = this.state;
+
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+
+        this.setState(() => ({
+            email: '',
+            password: ''
+        }));
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   onHandleChange = (event) => {
@@ -31,38 +39,38 @@ class SignIn extends React.Component {
       [name]: value,
     }));
   };
-  
+
   onHandleClick = () => {
-      signInWithGoogle();
-  }
+    signInWithGoogle();
+  };
 
   render() {
-      const { email, password } = this.state;
+    const { email, password } = this.state;
     return (
-      <div className='sign-in'>
+      <div className="sign-in">
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.onHandleSubmit}>
+        <form onSubmit={this.onSubmitHandler}>
           <FormInput
-            name='email'
-            type='email'
+            name="email"
+            type="email"
             onHandleChange={this.onHandleChange}
             value={email}
-            label='email'
+            label="email"
             required
           />
           <FormInput
-            name='password'
-            type='password'
+            name="password"
+            type="password"
             value={password}
             onHandleChange={this.onHandleChange}
-            label='password'
+            label="password"
             required
           />
-          <div className='buttons'>
-            <CustomButton type='submit'> Sign in </CustomButton>
-            <CustomButton onHandleClick={this.onHandleClick} isGoogleSignIn>
+          <div className="buttons">
+            <CustomButton type="submit"> Sign in </CustomButton>
+            <CustomButton type='button' onHandleClick={this.onHandleClick} isGoogleSignIn>
               Sign in with Google
             </CustomButton>
           </div>
