@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"; // we can navigate with history or link
+import { connect } from 'react-redux';
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
@@ -35,4 +36,10 @@ const Header = ({ currentUser }) => {
   );
 };
 
-export default Header;
+// const mapStateToProps = (state) => ({  //the state is actually root.reducer
+//     currentUser: state.user.currentUser
+// })
+
+const mapStateToProps = ({user: { currentUser }}) => ({ currentUser });
+
+export default connect(mapStateToProps)(Header);
