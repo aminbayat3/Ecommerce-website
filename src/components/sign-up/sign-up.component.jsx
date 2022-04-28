@@ -19,6 +19,8 @@ class SignUp extends React.Component {
     };
   }
 
+  isSubmit = null;
+
   onHandleSubmit = async (event) => {
     event.preventDefault();
     const { displayName, email, password, confirmPassword } = this.state;
@@ -27,6 +29,7 @@ class SignUp extends React.Component {
       alert("passwords don't match!");
       return;
     }
+    this.isSubmit = true;
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
@@ -35,15 +38,17 @@ class SignUp extends React.Component {
       );
 
       await createUserProfileDocument(user, { displayName });
-
-      this.setState(() => ({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      }));
+      if(this.isSubmit) {
+        this.setState(() => ({
+          displayName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        }));
+      }
+     
     } catch (error) {
-      console.log(error);
+      console.log('memory leak!', error);
     }
   };
 
@@ -54,6 +59,10 @@ class SignUp extends React.Component {
       [name]: value,
     }));
   };
+
+  componentWillUnmount() {
+    this.isSubmit = false;
+  }
 
   render() {
     const { displayName, email, password, confirmPassword } = this.state;

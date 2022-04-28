@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.css';
@@ -11,11 +11,22 @@ import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
+// as we can see componentWillUnmount does not get called when we signout and this leads to memory leak since we cannot cancel the subscription or any asynchronous tasks. the solution is to do the cleanup inside of signInAndsignUpPage component instead
 class App extends React.Component {
+  // constructor() {
+  //   super();
 
+  //   this.componentCleanup = this.componentCleanup.bind(this);
+  // }
   unsubscribeFromAuth = null;
 
+  // componentCleanup() {
+  //   this.unsubscribeFromAuth();
+  //   console.log("cleanup")
+  // }
+
   componentDidMount() {
+    console.log('mount')
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -32,12 +43,20 @@ class App extends React.Component {
 
       }
       setCurrentUser(userAuth);
+
     });
+    // window.addEventListener('beforeunload', this.componentCleanup); // this is for when we are refreshing the page:::When the page refreshes react doesn't have the chance to unmount the components as normal. Use the window.onbeforeunload event to set a handler for refresh
   }
 
-  componentWillUnmount() {
+  componentWillUnmount() { //we need this lifecycle method because when we leave the webiste we want to cleanup all the subscriptions
     this.unsubscribeFromAuth();
   }
+
+//  componentWillUnmount() {
+//    this.componentCleanup();
+//    console.log('unmount');
+//    window.removeEventListener('beforeunload', this.componentCleanup);
+//  }
 
   render() {
     return (
@@ -46,7 +65,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={SignInAndSignUpPage} />
+          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
         </Switch>
       </div>
     );
@@ -54,8 +73,13 @@ class App extends React.Component {
   
 }
 
+const mapStateToProps = ({user: { currentUser }}) => ({ currentUser });
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+ 
+
+//git commit -m "updating our app to redirect to home if user is signed in"
