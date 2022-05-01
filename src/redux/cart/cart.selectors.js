@@ -4,14 +4,10 @@ import { createSelector } from "reselect"; // output selectors use input selecto
 
 const selectCart = (state) => state.cart;
 
-// const selectUser = state => state.user
-
-// export const selectCartItems = createSelector([selectCart, selectUser], () => )
-
 export const selectCartItems = createSelector(
   [selectCart],
   (cart) => cart.cartItems
-); // actually createSelector function makes a selector a memoized selector.
+); 
 
 export const selectCartHidden = createSelector([selectCart], (cart) => cart.hidden);
 
@@ -23,4 +19,4 @@ export const selectCartItemsCount = createSelector(
         accumulatedQuantity + cartItem.quantity,
       0
     )
-); // so output selectors can also use other output selectors to get a peice of state
+); 

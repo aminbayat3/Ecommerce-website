@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom"; // we can navigate with history or link
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import { auth } from "../../firebase/firebase.utils";
-import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 
@@ -37,10 +38,7 @@ const Header = ({ currentUser, hidden }) => {
         )}
         <CartIcon />
       </div>
-      {
-        hidden ? null : (<CartDropdown />)
-      }
-      
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };
@@ -51,9 +49,9 @@ const Header = ({ currentUser, hidden }) => {
 
 // const mapStateToProps = ({user: { currentUser }, cart: { hidden }}) => ({ currentUser, hidden });
 
-const mapStateToProps = (state) => ({
-  currentUser: selectCurrentUser(state),
-  hidden: selectCartHidden(state)
+const mapStateToProps = createStructuredSelector({ // evne if we had one property we still needed to use createStructuredSelector because in the future if we do need to put in more then it's easy
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps)(Header);
