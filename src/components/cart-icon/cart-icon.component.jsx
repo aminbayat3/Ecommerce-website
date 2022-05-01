@@ -7,22 +7,18 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import './cart-icon.styles.scss'; //remember if we want to use forEach or for loop we need to use useEffect because they create some kind of sideEffect // push method also makes sideEffect
 
-const CartIcon = ({ toggleCart, quantityArray }) => {
-    let count = 0;
-    quantityArray.forEach((quantity) => {
-        count += quantity
-    });
+const CartIcon = ({ toggleCart, itemCount }) => {
     return(
         <div className='cart-icon' onClick={() => toggleCart()}>
             <ShoppingIcon className='shopping-icon' />
-            <span className='item-count'>{count}</span>
+            <span className='item-count'>{itemCount}</span>
         </div>
     )
 }
 
 
 const mapStateToProps = ({ cart: { cartItems }}) => ({
-    quantityArray: cartItems.map((cartItem) => (cartItem.quantity))
+    itemCount: cartItems.reduce((accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity, 0)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -31,4 +27,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
 
-// updated the scrollbar for the CartDropdown component and also add a counter to the cartIcon component 
