@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
 
-// explained why we need to use selector everytime we're getting a slice of the state and then we applied it into our website to increase the performance
+
