@@ -24,7 +24,7 @@ const CollectionItem = ({ item, cartItems}) => {
                 <span className='price'>{price}</span>
             </div>
 
-            <CustomButton onHandleClick={onHandleClick} inverted>Add item to cart </CustomButton> 
+            <CustomButton onHandleClick={onHandleClick} inverted>Add to cart </CustomButton> 
         </div>
     )
 }
