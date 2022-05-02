@@ -14,6 +14,7 @@ $main-color: black;
     right: 0px;
     z-index: 5;
 
+    
     .cart-items {
         height: 240px;
         display: flex;
@@ -30,6 +31,12 @@ $main-color: black;
             background: $main-color;
             border-radius: 0 10px 10px 0;
         }
+
+        .empty-message { 
+            font-size: 18px;
+            margin: 50px auto;
+        }
+    
     }
 
     .custom-button {
