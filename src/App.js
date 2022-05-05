@@ -14,19 +14,9 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
-// as we can see componentWillUnmount does not get called when we signout and this leads to memory leak since we cannot cancel the subscription or any asynchronous tasks. the solution is to do the cleanup inside of signInAndsignUpPage component instead
 class App extends React.Component {
-  // constructor() {
-  //   super();
 
-  //   this.componentCleanup = this.componentCleanup.bind(this);
-  // }
   unsubscribeFromAuth = null;
-
-  // componentCleanup() {
-  //   this.unsubscribeFromAuth();
-  //   console.log("cleanup")
-  // }
 
   componentDidMount() {
     console.log('mount')
@@ -48,18 +38,12 @@ class App extends React.Component {
       setCurrentUser(userAuth);
 
     });
-    // window.addEventListener('beforeunload', this.componentCleanup); // this is for when we are refreshing the page:::When the page refreshes react doesn't have the chance to unmount the components as normal. Use the window.onbeforeunload event to set a handler for refresh
+   
   }
 
-  componentWillUnmount() { //we need this lifecycle method because when we leave the webiste we want to cleanup all the subscriptions
+  componentWillUnmount() { 
     this.unsubscribeFromAuth();
   }
-
-//  componentWillUnmount() {
-//    this.componentCleanup();
-//    console.log('unmount');
-//    window.removeEventListener('beforeunload', this.componentCleanup);
-//  }
 
   render() {
     return (
@@ -88,4 +72,3 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(App);
  
 
-//git commit -m "updating our app to redirect to home if user is signed in"

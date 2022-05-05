@@ -1,6 +1,4 @@
-import { createSelector } from "reselect"; // output selectors use input selectors to create selector
-
-//input selectors are just function that gets the state and return only a slice of it
+import { createSelector } from "reselect"; 
 
 const selectCart = (state) => state.cart;
 

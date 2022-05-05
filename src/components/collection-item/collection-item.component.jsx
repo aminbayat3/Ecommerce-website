@@ -33,5 +33,4 @@ const mapDispatchToProps = (dispatch) => ({
     cartItems: (item) => dispatch(addItem(item))
 });
 
-// we cannot use onClick on a component, so instead we can define a ClickHandler function with the same name to remedy this problem
 export default connect(null, mapDispatchToProps)(CollectionItem);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // we can navigate with history or link
+import { Link } from "react-router-dom"; 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -43,13 +43,8 @@ const Header = ({ currentUser, hidden }) => {
   );
 };
 
-// const mapStateToProps = (state) => ({  //the state is actually root.reducer
-//     currentUser: state.user.currentUser
-// })
 
-// const mapStateToProps = ({user: { currentUser }, cart: { hidden }}) => ({ currentUser, hidden });
-
-const mapStateToProps = createStructuredSelector({ // evne if we had one property we still needed to use createStructuredSelector because in the future if we do need to put in more then it's easy
+const mapStateToProps = createStructuredSelector({ 
   currentUser: selectCurrentUser,
   hidden: selectCartHidden,
 });

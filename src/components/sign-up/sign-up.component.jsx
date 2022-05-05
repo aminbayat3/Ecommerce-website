@@ -29,7 +29,7 @@ class SignUp extends React.Component {
       alert("passwords don't match!");
       return;
     }
-    this.isSubmit = true;
+    this.isSubmit = true; //for a fetch call using abortController is better// also in this case you can use a library called cancelable-promise
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
