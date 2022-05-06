@@ -1,4 +1,5 @@
-export const HOME_DATA = [
+const INITIAL_STATE = {
+  sections: [
     {
         title: 'hats',
         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
@@ -31,4 +32,15 @@ export const HOME_DATA = [
         id: 5,
         linkUrl: ''
       }
-]
+  ],
+};
+
+const directoryReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+
+export default directoryReducer;

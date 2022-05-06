@@ -47,3 +47,8 @@ provider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
+
+// firebase auth gives us session persistence: when we close the application and come back we can see we are still signed in
+
+// we have localStorage and sessionStorage in the window object / sessionStorage we can keep the data as long as we dont close the application so we can refresh the page and still have our data whereas with localStorage as you can probably guess we will have the data even when we close the page
+  

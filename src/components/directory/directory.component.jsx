@@ -1,30 +1,25 @@
 import React from "react";
-
-import { HOME_DATA } from "./home-date";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import MenuItem from "../menu-item/menu-item.component";
+import { selectDirectorySections } from "../../redux/directory/directory.selectors";
 
 import "./directory.styles.scss";
 
-class Directory extends React.Component {
-  constructor() {
-    super();
+const Directory = ({ sections }) => {
+  // we need to move this state in redux because when we want to create our mobile component, again we will need these data and we dont want to do tunneling to get the props
 
-    this.state = {
-      sections: HOME_DATA,
-    };
-  }
+  return (
+    <div className="directory-menu">
+      {sections.map(({ id, ...otherProps }) => {
+        return <MenuItem key={id} {...otherProps} />;
+      })}
+    </div>
+  );
+};
 
-  render() {
-    const { sections } = this.state;
-    return (
-      <div className="directory-menu">
-        {sections.map(({ id, ...otherProps }) => {
-          return <MenuItem key={id} {...otherProps} />;
-        })}
-      </div>
-    );
-  }
-}
-
-export default Directory;
+const mapStateToProps = createStructuredSelector({
+  sections: selectDirectorySections,
+});
+export default connect(mapStateToProps)(Directory);
