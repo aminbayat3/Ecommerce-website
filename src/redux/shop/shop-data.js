@@ -1,5 +1,5 @@
-export const SHOP_DATA = [
-  {
+export const SHOP_DATA = { // we can set the key to the corresponding object with that url Parameter we're going to pass in /. we also wanna make sure that the key we do use  exist in the object itself.j usually we would use an Id or UID but in our case because our ids are numbers its okay if we just use the title but lowercase. for us the title also happens to be the Url parameter that we're using  
+  hats: {
     id: 1,
     title: "Hats",
     routeName: "hats",
@@ -60,7 +60,7 @@ export const SHOP_DATA = [
       },
     ],
   },
-  {
+  sneakers: {
     id: 2,
     title: "Sneakers",
     routeName: "sneakers",
@@ -115,7 +115,7 @@ export const SHOP_DATA = [
       },
     ],
   },
-  {
+  jackets: {
     id: 3,
     title: "Jackets",
     routeName: "jackets",
@@ -152,7 +152,7 @@ export const SHOP_DATA = [
       },
     ],
   },
-  {
+  womens: {
     id: 4,
     title: "Womens",
     routeName: "womens",
@@ -201,7 +201,7 @@ export const SHOP_DATA = [
       },
     ],
   },
-  {
+  mens: {
     id: 5,
     title: "Mens",
     routeName: "mens",
@@ -244,4 +244,4 @@ export const SHOP_DATA = [
       },
     ],
   },
-];
+};

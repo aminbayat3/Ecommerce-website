@@ -1,5 +1,5 @@
 .collection-item {
-    width: 22%;
+    width: 22vw; // 22% the difference is that percentage depends on the container but vw depnds on the width of the screen
     display: flex;
     flex-direction: column;
     height: 350px;
