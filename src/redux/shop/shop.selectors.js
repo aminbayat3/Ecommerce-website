@@ -9,7 +9,7 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector( 
     [selectCollections],
-    (collections) => Object.keys(collections).map((key) => {
+    (collections) => Object.keys(collections).map((key) => {   //we also could simply say (collections) => Object.values(collections) and that's it
     // collections[key].items = collections[key].items.filter((item, idx) => idx < 4 ); //by doing this we dont have to filter the items inside of CollectionPreview commponent
         return collections[key];
         // return { ...Object.values(collections)[i] }

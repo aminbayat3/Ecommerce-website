@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.050d09cb.css",
+    "main.js": "/static/js/main.214db7a4.js",
+    "static/js/377.8e427cf6.chunk.js": "/static/js/377.8e427cf6.chunk.js",
+    "service-worker.js": "/service-worker.js",
+    "static/media/Evolve-Clothing.svg": "/static/media/Evolve-Clothing.e6964e54b7374bb47cc6e3f10bcd0f27.svg",
+    "static/media/11.2 shopping-bag.svg": "/static/media/11.2 shopping-bag.a688874f6f1507316bdfa420328a4a53.svg",
+    "index.html": "/index.html",
+    "main.050d09cb.css.map": "/static/css/main.050d09cb.css.map",
+    "main.214db7a4.js.map": "/static/js/main.214db7a4.js.map",
+    "377.8e427cf6.chunk.js.map": "/static/js/377.8e427cf6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.050d09cb.css",
+    "static/js/main.214db7a4.js"
+  ]
+}
